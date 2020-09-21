@@ -1,5 +1,5 @@
 ## Bigquery tasks
-- [x] access required to download data
+- [ ] access required to download data
 
 
 ## Analyse historical time series data
