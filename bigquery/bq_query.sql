@@ -42,10 +42,28 @@ group by 1,2 ) as temp1
 /*
 4. By using the ​GoogleAnalyticsSample​ data and BackendDataSample tables, analyse
 how often users tend to change their location in the beginning of their journey (screens like home and listing) versus in checkout and on order placement and demonstrate the the deviation between earlier and later inputs (if any) in terms of coordinates change. Then, using the ​BackendDataSample​ table, see if those customers who changed their address ended placing orders and if those orders were delivered successfully, if so, did they match their destination.
+
+eventCategory cnt
+ios.onboarding  1
+ios.order_confirmation  1
+android.NA  1
+android.onboarding  3
+ios.other 18
+ios.shop_details  19
+ios.user_account  29
+android.null  347
+android.user_account  1451
+android.checkout  4478
+android.home  5585
+ios.checkout  13398
+ios.home  15477
+android.shop_list 34467
+ios.shop_list 46386
 */
 
 -- initial page was home/search/shop_list
 -- later becomes: checkout/order_confirmation
+
 
 WITH
   address_update AS(

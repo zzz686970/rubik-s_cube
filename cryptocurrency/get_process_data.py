@@ -2,7 +2,7 @@
 # @Author: zhizhong
 # @Date:   2020-09-17 21:58:15
 # @Last Modified by:   zhizhong
-# @Last Modified time: 2020-09-20 21:42:25
+# @Last Modified time: 2020-09-28 18:37:24
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -45,7 +45,7 @@ def get_data(url, endpoint,symbol = None, market = None, api_key = API_KEY, data
 
 	return df
 
-def calculate_price(data = None):
+def calculate_price(df = None):
 	"""calculate close price based on requirement
 	
 	convert json to DataFrame for process.
@@ -53,13 +53,13 @@ def calculate_price(data = None):
 	2. compute 3-day and 7-day rolling average report
 	
 	Arguments:
-		data {[dict]} -- [stock price]
+		df {[dict]} -- [stock price]
 	"""
 	# with open('raw_data.json', 'r') as f:
 	# 	json_data = json.load(f)
 	# df = pd.DataFrame.from_dict(json_data)
 
-	df = pd.read_csv('raw_data.csv')
+	## df = pd.read_csv('raw_data.csv')
 
 	## convert timestamp as date type
 	df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -84,13 +84,14 @@ def visualize_result(data, file_name):
 	fig.get_figure().savefig(file_name)
 
 if __name__ == '__main__':
+	### Get symbol BTC as market 'USD'
+
 	url='https://www.alphavantage.co/query'
 	endpoint = 'DIGITAL_CURRENCY_DAILY'
 	df = get_data(url, endpoint, symbol = 'BTC', market = 'USD')
-	calculate_price()
+	calculate_price(df)
 
 
-### Get symbol BTC as market 'USD'
 
 
 
