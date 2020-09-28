@@ -1,14 +1,14 @@
 # -*- coding: utf-8 -*-
 # @Author: zhizhong
 # @Date:   2020-09-17 21:58:15
-# @Last Modified by:   zhizhong
-# @Last Modified time: 2020-09-28 18:37:24
+# @Last Modified by:   zzz686970
+# @Last Modified time: 2020-09-28 21:37:26
 import requests
 import pandas as pd
 import matplotlib.pyplot as plt
 import io
+import os 
 from datetime import datetime, timedelta 
-
 
 API_KEY="M99S38YJYSKRDSEY"
 
@@ -88,7 +88,11 @@ if __name__ == '__main__':
 
 	url='https://www.alphavantage.co/query'
 	endpoint = 'DIGITAL_CURRENCY_DAILY'
-	df = get_data(url, endpoint, symbol = 'BTC', market = 'USD')
+	if not os.path.exists('raw_data.csv'):
+		df = get_data(url, endpoint, symbol = 'BTC', market = 'USD')
+	else:
+		df = pd.read_csv('raw_data.csv')
+
 	calculate_price(df)
 
 
