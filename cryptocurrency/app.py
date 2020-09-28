@@ -4,14 +4,14 @@ import dash_html_components as html
 import plotly.graph_objects as go
 import pandas as pd
 from datetime import timedelta
+from flask import Flask
 
 pd.options.plotting.backend = "plotly"
 
 
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
-
-app = dash.Dash(__name__, external_stylesheets=external_stylesheets)
-server = app.server
+server = Flask(__name__)
+app = dash.Dash(server = server, external_stylesheets=external_stylesheets)
 df = pd.read_csv('raw_data.csv')
 
 df['timestamp'] = pd.to_datetime(df['timestamp'])
@@ -68,4 +68,4 @@ app.layout = html.Div([
 ])
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run_server(debug=True, port = 8050)
