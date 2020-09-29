@@ -16,8 +16,7 @@ python3 app.py
 ```
 ## cd into folder which has docker file
 cd cryptocurrency
-docker build -t cryptocurrency:0.1 .
-docker run  cryptocurrency:0.1
+docker-compose up
 ## open browser
 http://localhost:8050/
 ```

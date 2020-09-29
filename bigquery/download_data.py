@@ -75,23 +75,13 @@ resp.raise_for_status()
 total_counts = int(resp.json().get('totalRows'))
 pageToken = resp.json().get('pageToken')
 for idx, row in enumerate(resp.json()['rows'], 1):
-	# print(row)
-	temp = [idx]
-	temp.append(flatten(row))
-	# print(temp)
-	# print(temp)
-	# for el in row.get('f'):
-	# 	if isinstance(el, dict):
-	# 		temp.append(el.get('v'))
-	# 	elif isinstance(el, list):
-
-	# temp = [idx] + [el.get('v') for el in row.get('f') if ]
-	# result.append(temp)
+	temp = [idx] + [el.get('v') for el in row.get('f') ]
+	result.append(temp)
 
 df = pd.DataFrame(result)
 df.to_csv('ga_sessions_export.csv', index = False, header = False)
 
-while cnt < 20:
+while cnt < 10000:
 	result = []
 	params.update({'pageToken': pageToken})
 	params.update({'startIndex': cnt})
@@ -111,6 +101,5 @@ while cnt < 20:
 	df.to_csv('ga_sessions_export.csv', index = False, mode='a', header=False)
 
 # df.columns = ['Row','fullvisitorid','visitNumber','visitId','visitStartTime','date','visits','hits','timeOnSite','transactions','transactionRevenue','newVisits','screenviews','uniqueScreenviews','timeOnScreen','totalTransactionRevenue','source','medium','browser','operatingSystem','isMobile','deviceCategory','country','hit.hitNumber','hit.time','hit.hour','hit.isInteraction','hit.isEntrance','hit.isExit','hit.type','hit.name','hit.landingScreenName','hit.screenName','hit.eventCategory','hit.eventAction','hit.eventLabel','hit.transactionId','hit.customDimensions.index','hit.customDimensions.value']
-
 
 
